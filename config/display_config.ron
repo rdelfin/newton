@@ -1,4 +1,6 @@
 (
-  title: "Amethyst Starter 2D template",
-  dimensions: Some((800, 600)),
+  title: "Newton",
+  dimensions: Some((1770, 1000)),
+  max_dimensions: Some((1770, 1000)),
+  min_dimensions: Some((1770, 1000)),
 )
