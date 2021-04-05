@@ -3,7 +3,7 @@ use nalgebra::Vector2;
 
 #[derive(Debug, Component)]
 #[storage(VecStorage)]
-struct RigidBody {
-    position: Vector2<f32>,
-    velocity: Vector2<f32>,
+pub struct RigidBody {
+    pub position: Vector2<f32>,
+    pub velocity: Vector2<f32>,
 }
