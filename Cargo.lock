@@ -1781,7 +1781,7 @@ version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5cc7ad3d82c845bdb5dde34ffdcc7a5fb4d2996e1e1ee0f19c33bc80e15196b9"
 dependencies = [
- "num-traits 0.2.14",
+ "num-traits 0.1.43",
 ]
 
 [[package]]
@@ -1990,6 +1990,7 @@ version = "0.1.0"
 dependencies = [
  "amethyst",
  "log",
+ "nalgebra",
  "specs-derive",
 ]
 
@@ -3655,7 +3656,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04f8ab788026715fa63b31960869617cba39117e520eb415b0139543e325ab59"
 dependencies = [
  "cfg-if 0.1.10",
- "rand 0.7.3",
+ "rand 0.4.6",
  "static_assertions 1.1.0",
 ]
 

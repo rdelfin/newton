@@ -11,6 +11,7 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+mod components;
 mod state;
 
 fn main() -> amethyst::Result<()> {
@@ -32,7 +33,7 @@ fn main() -> amethyst::Result<()> {
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
                     RenderToWindow::from_config_path(display_config)?
-                        .with_clear([0.34, 0.36, 0.52, 1.0]),
+                        .with_clear([0.820, 0.886, 1., 1.]),
                 )
                 .with_plugin(RenderUi::default())
                 .with_plugin(RenderFlat2D::default()),

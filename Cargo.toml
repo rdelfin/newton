@@ -10,3 +10,4 @@ edition = "2018"
 amethyst = { version = "0.15", features = ["vulkan", "no-slow-safety-checks"] }
 specs-derive = "0.4"
 log = "0.4"
+nalgebra = "0.19"
