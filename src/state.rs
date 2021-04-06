@@ -1,4 +1,4 @@
-use crate::resources;
+use crate::{entities, resources};
 use amethyst::{
     core::transform::Transform,
     input::{is_close_requested, is_key_down, VirtualKeyCode},
@@ -6,6 +6,7 @@ use amethyst::{
     renderer::Camera,
     window::ScreenDimensions,
 };
+use anyhow::Result;
 
 /// A dummy game state that shows 3 sprites.
 pub struct MyState;
@@ -16,6 +17,7 @@ impl SimpleState for MyState {
         let dimensions = (*world.read_resource::<ScreenDimensions>()).clone();
         init_camera(world, &dimensions);
         load_sprites(world);
+        load_world(world).unwrap();
     }
 
     fn handle_event(
@@ -48,4 +50,9 @@ fn load_sprites(world: &mut World) {
     let mut sprite_cache = resources::SpriteCache::new();
     sprite_cache.load(resources::SpriteKey::Ball, world);
     world.insert(sprite_cache);
+}
+
+fn load_world(world: &mut World) -> Result<()> {
+    entities::objects::new_ball(world)?;
+    Ok(())
 }
