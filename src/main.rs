@@ -12,6 +12,7 @@ use amethyst::{
 };
 
 mod components;
+mod resources;
 mod state;
 mod systems;
 
@@ -20,7 +21,7 @@ fn main() -> amethyst::Result<()> {
 
     let app_root = application_root_dir()?;
 
-    let resources = app_root.join("assets");
+    let resources = app_root.join("resources");
     let display_config = app_root.join("config/display_config.ron");
     let key_bindings_path = app_root.join("config/input.ron");
 

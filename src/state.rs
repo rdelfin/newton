@@ -1,3 +1,4 @@
+use crate::resources;
 use amethyst::{
     core::transform::Transform,
     input::{is_close_requested, is_key_down, VirtualKeyCode},
@@ -14,6 +15,7 @@ impl SimpleState for MyState {
         let world = data.world;
         let dimensions = (*world.read_resource::<ScreenDimensions>()).clone();
         init_camera(world, &dimensions);
+        load_sprites(world);
     }
 
     fn handle_event(
@@ -40,4 +42,10 @@ fn init_camera(world: &mut World, dimensions: &ScreenDimensions) {
         .with(Camera::standard_2d(dimensions.width(), dimensions.height()))
         .with(transform)
         .build();
+}
+
+fn load_sprites(world: &mut World) {
+    let mut sprite_cache = resources::SpriteCache::new();
+    sprite_cache.load(resources::SpriteKey::Ball, world);
+    world.insert(sprite_cache);
 }
