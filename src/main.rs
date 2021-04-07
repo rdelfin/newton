@@ -41,7 +41,12 @@ fn main() -> amethyst::Result<()> {
                 .with_plugin(RenderUi::default())
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with(systems::MovementSystem, "movement_system", &[]);
+        .with(systems::GravitySystem, "gravity_system", &[])
+        .with(
+            systems::MovementSystem,
+            "movement_system",
+            &["gravity_system"],
+        );
 
     let mut game = Application::new(resources, state::MyState, game_data)?;
     game.run();

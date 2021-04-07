@@ -1,9 +1,10 @@
-use crate::components::RigidBody;
+use crate::components::{Gravitational, RigidBody};
 use amethyst::{
     core::{Time, Transform},
     derive::SystemDesc,
-    ecs::{Join, Read, System, SystemData, WriteStorage},
+    ecs::{Join, Read, ReadStorage, System, SystemData, WriteStorage},
 };
+use nalgebra::Vector2;
 
 #[derive(SystemDesc)]
 pub struct MovementSystem;
@@ -29,6 +30,24 @@ impl<'s> System<'s> for MovementSystem {
                 rigid_body.position.y.round(),
                 transform.translation().z,
             );
+        }
+    }
+}
+
+#[derive(SystemDesc)]
+pub struct GravitySystem;
+
+impl<'s> System<'s> for GravitySystem {
+    type SystemData = (
+        WriteStorage<'s, RigidBody>,
+        ReadStorage<'s, Gravitational>,
+        Read<'s, Time>,
+    );
+
+    fn run(&mut self, (mut rigid_bodies, gravitationals, time): Self::SystemData) {
+        for (rigid_body, gravitational) in (&mut rigid_bodies, &gravitationals).join() {
+            let frame_delta_s = time.fixed_time().as_secs_f32();
+            rigid_body.velocity += Vector2::new(0.0, -1.0) * gravitational.0 * frame_delta_s;
         }
     }
 }

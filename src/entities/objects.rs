@@ -1,5 +1,5 @@
 use crate::{
-    components::RigidBody,
+    components::{Gravitational, RigidBody},
     resources::{SpriteCache, SpriteKey},
 };
 use amethyst::{
@@ -29,7 +29,8 @@ pub fn new_ball(world: &mut World) -> Result<Entity> {
         .with(Transform::default())
         .with(RigidBody {
             position: Vector2::new(885.0, 500.0),
-            velocity: Vector2::new(0.0, -50.0),
+            velocity: Vector2::new(0.0, 0.0),
         })
+        .with(Gravitational(98.0))
         .build())
 }

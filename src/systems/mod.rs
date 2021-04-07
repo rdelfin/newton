@@ -1,3 +1,3 @@
 mod physics;
 
-pub use self::physics::MovementSystem;
+pub use self::physics::{GravitySystem, MovementSystem};
