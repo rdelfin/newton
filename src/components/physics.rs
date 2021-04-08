@@ -14,6 +14,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Component, Debug, Deserialize, Serialize, PrefabData)]
 #[prefab(Component)]
 #[storage(DenseVecStorage)]
+#[serde(deny_unknown_fields)]
 pub struct RigidBody {
     pub position: Vector2<f32>,
     pub velocity: Vector2<f32>,
@@ -22,4 +23,5 @@ pub struct RigidBody {
 #[derive(Clone, Component, Debug, Deserialize, Serialize, PrefabData)]
 #[prefab(Component)]
 #[storage(VecStorage)]
+#[serde(deny_unknown_fields)]
 pub struct Gravitational(pub f32);
