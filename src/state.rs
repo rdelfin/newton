@@ -49,10 +49,12 @@ fn init_camera(world: &mut World, dimensions: &ScreenDimensions) {
 fn load_sprites(world: &mut World) {
     let mut sprite_cache = resources::SpriteCache::new();
     sprite_cache.load(resources::SpriteKey::Ball, world);
+    sprite_cache.load(resources::SpriteKey::Wall, world);
     world.insert(sprite_cache);
 }
 
 fn load_world(world: &mut World) -> Result<()> {
     entities::objects::new_ball(world)?;
+    entities::objects::new_wall(world)?;
     Ok(())
 }
