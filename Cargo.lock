@@ -1998,6 +1998,7 @@ dependencies = [
  "anyhow",
  "log",
  "nalgebra",
+ "serde",
  "specs-derive",
  "tuple-map",
 ]

@@ -11,5 +11,6 @@ amethyst = { version = "0.15", features = ["vulkan", "no-slow-safety-checks"] }
 anyhow = "1.0"
 log = "0.4"
 nalgebra = "0.19"
+serde = "1.0"
 specs-derive = "0.4"
 tuple-map = "0.4"
