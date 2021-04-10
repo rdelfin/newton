@@ -1,5 +1,6 @@
-use crate::{entities, resources};
+use crate::{entities, prefabs, resources};
 use amethyst::{
+    assets::ProgressCounter,
     core::transform::Transform,
     input::{is_close_requested, is_key_down, VirtualKeyCode},
     prelude::*,
@@ -8,16 +9,18 @@ use amethyst::{
 };
 use anyhow::Result;
 
-/// A dummy game state that shows 3 sprites.
-pub struct MyState;
+pub struct MyState {
+    progress_counter: Option<ProgressCounter>,
+}
 
 impl SimpleState for MyState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
+        self.progress_counter = Some(Default::default());
         let world = data.world;
         let dimensions = (*world.read_resource::<ScreenDimensions>()).clone();
         init_camera(world, &dimensions);
         load_sprites(world);
-        load_world(world).unwrap();
+        self.load_world(world).unwrap();
     }
 
     fn handle_event(
@@ -32,6 +35,33 @@ impl SimpleState for MyState {
         }
 
         Trans::None
+    }
+
+    fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
+        // Checks if we are still loading data
+
+        if let Some(ref progress_counter) = self.progress_counter {
+            // Checks progress
+            if progress_counter.is_complete() {
+                // All data loaded
+                self.progress_counter = None;
+            }
+        }
+        Trans::None
+    }
+}
+
+impl MyState {
+    pub fn new() -> MyState {
+        MyState {
+            progress_counter: None,
+        }
+    }
+
+    fn load_world(&mut self, world: &mut World) -> Result<()> {
+        prefabs::create_ball_prefab(world, &mut self.progress_counter.as_mut().unwrap());
+        entities::objects::new_wall(world)?;
+        Ok(())
     }
 }
 
@@ -51,10 +81,4 @@ fn load_sprites(world: &mut World) {
     sprite_cache.load(resources::SpriteKey::Ball, world);
     sprite_cache.load(resources::SpriteKey::Wall, world);
     world.insert(sprite_cache);
-}
-
-fn load_world(world: &mut World) -> Result<()> {
-    entities::objects::new_ball(world)?;
-    entities::objects::new_wall(world)?;
-    Ok(())
 }

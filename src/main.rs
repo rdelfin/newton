@@ -1,4 +1,5 @@
 use amethyst::{
+    assets::PrefabLoaderSystemDesc,
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     prelude::*,
@@ -13,6 +14,7 @@ use amethyst::{
 
 mod components;
 mod entities;
+mod prefabs;
 mod resources;
 mod state;
 mod systems;
@@ -27,6 +29,11 @@ fn main() -> amethyst::Result<()> {
     let key_bindings_path = app_root.join("config/input.ron");
 
     let game_data = GameDataBuilder::default()
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::BallPrefab>::default(),
+            "ball_loader",
+            &[],
+        )
         .with_bundle(TransformBundle::new())?
         .with_bundle(
             InputBundle::<StringBindings>::new().with_bindings_from_file(&key_bindings_path)?,
@@ -41,14 +48,14 @@ fn main() -> amethyst::Result<()> {
                 .with_plugin(RenderUi::default())
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with(systems::GravitySystem, "gravity_system", &[])
+        .with(systems::GravitySystem, "gravity_system", &["ball_loader"])
         .with(
             systems::MovementSystem,
             "movement_system",
-            &["gravity_system"],
+            &["ball_loader", "gravity_system"],
         );
 
-    let mut game = Application::new(resources, state::MyState, game_data)?;
+    let mut game = Application::new(resources, state::MyState::new(), game_data)?;
     game.run();
 
     Ok(())
