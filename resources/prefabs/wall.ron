@@ -7,7 +7,7 @@ Prefab(
                     position: [885.0, 20.0],
                     velocity: [0.0, 0.0],
                 ),
-                gravitational: Gravitational(0.0),
+                gravitational: None,
                 sprite_scene: SpriteScenePrefab(
                     sheet: Sheet(
                         texture: File(

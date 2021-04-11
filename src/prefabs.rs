@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 #[serde(deny_unknown_fields)]
 pub struct GameObjectPrefab {
     rigid_body: RigidBody,
-    gravitational: Gravitational,
+    gravitational: Option<Gravitational>,
     sprite_scene: SpriteScenePrefab,
 }
 
