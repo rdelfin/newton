@@ -1,4 +1,4 @@
-use crate::components::{Gravitational, RigidBody};
+use crate::components::{Collider, Gravitational, RigidBody};
 use amethyst::{
     core::{Time, Transform},
     derive::SystemDesc,
@@ -50,4 +50,12 @@ impl<'s> System<'s> for GravitySystem {
             rigid_body.velocity += Vector2::new(0.0, -1.0) * gravitational.0 * frame_delta_s;
         }
     }
+}
+
+pub struct CollisionSystem;
+
+impl<'s> System<'s> for CollisionSystem {
+    type SystemData = (WriteStorage<'s, RigidBody>, ReadStorage<'s, Collider>);
+
+    fn run(&mut self, (mut rigid_bodies, colliders): Self::SystemData) {}
 }

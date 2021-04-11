@@ -49,6 +49,7 @@ Prefab(
                         sprite_number: 0,
                     ),
                     transform: Transform(
+                        // Translation is overriden by rigid body
                         translation: (0.0, 0.0, 0.0),
                         scale: (1.0, 1.0, 1.0),
                     ),

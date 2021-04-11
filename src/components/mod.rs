@@ -1,3 +1,3 @@
 mod physics;
 
-pub use self::physics::{Gravitational, RigidBody};
+pub use self::physics::{Collider, Gravitational, RigidBody};

@@ -25,3 +25,18 @@ pub struct RigidBody {
 #[storage(VecStorage)]
 #[serde(deny_unknown_fields)]
 pub struct Gravitational(pub f32);
+
+#[derive(Clone, Component, Debug, Deserialize, Serialize, PrefabData)]
+#[prefab(Component)]
+#[storage(DenseVecStorage)]
+#[serde(deny_unknown_fields)]
+pub enum Collider {
+    SquareCollider {
+        dims: Vector2<f32>,
+        pos: Vector2<f32>,
+    },
+    CircleCollider {
+        r: f32,
+        pos: Vector2<f32>,
+    },
+}
