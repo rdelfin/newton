@@ -8,7 +8,6 @@ Prefab(
                     velocity: [0.0, 0.0],
                 ),
                 gravitational: Gravitational(980.0),
-                transparent: Transparent(),
                 sprite_scene: SpriteScenePrefab(
                     sheet: Sheet(
                         texture: File(
@@ -46,7 +45,7 @@ Prefab(
                         name: "ball",
                     ),
                     render: SpriteRenderPrefab(
-                        sheet: "bat",
+                        sheet: "ball",
                         sprite_number: 0,
                     ),
                     transform: Transform(

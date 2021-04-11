@@ -37,7 +37,7 @@ impl SimpleState for MyState {
         Trans::None
     }
 
-    fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
+    fn update(&mut self, _data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
         // Checks if we are still loading data
 
         if let Some(ref progress_counter) = self.progress_counter {
