@@ -34,6 +34,11 @@ fn main() -> amethyst::Result<()> {
             "ball_loader",
             &[],
         )
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::WallPrefab>::default(),
+            "wall_loader",
+            &[],
+        )
         .with_bundle(TransformBundle::new())?
         .with_bundle(
             InputBundle::<StringBindings>::new().with_bindings_from_file(&key_bindings_path)?,

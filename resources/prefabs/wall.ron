@@ -1,0 +1,58 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        PrefabEntity(
+            data: WallPrefab(
+                rigid_body: RigidBody(
+                    position: [885.0, 500.0],
+                    velocity: [0.0, 0.0],
+                ),
+                sprite_scene: SpriteScenePrefab(
+                    sheet: Sheet(
+                        texture: File(
+                            "sprites/wall.png",
+                            (
+                                "IMAGE",
+                                (
+                                    sampler_info: (
+                                        min_filter: Nearest,
+                                        mag_filter: Nearest,
+                                        mip_filter: Nearest,
+                                        wrap_mode: (Tile, Tile, Tile),
+                                        lod_bias: (0),
+                                        lod_range: (
+                                            start: ( 0 ),
+                                            end: ( 8000 ),
+                                        ),
+                                        comparison: None,
+                                        border: (0),
+                                        normalized: true,
+                                        anisotropic: Off,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        sprites: [
+                            List((
+                                texture_width: 10,
+                                texture_height: 10,
+                                sprites: [
+                                    (x: 0, y: 0, width: 10, height: 10),
+                                ],
+                            )),
+                        ],
+                        name: "wall",
+                    ),
+                    render: SpriteRenderPrefab(
+                        sheet: "wall",
+                        sprite_number: 0,
+                    ),
+                    transform: Transform(
+                        translation: (0.0, 0.0, 0.0),
+                        scale: (100.0, 1.0, 1.0),
+                    ),
+                ),
+            ),
+        ),
+    ],
+)

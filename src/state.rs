@@ -60,7 +60,7 @@ impl MyState {
 
     fn load_world(&mut self, world: &mut World) -> Result<()> {
         prefabs::create_ball_prefab(world, &mut self.progress_counter.as_mut().unwrap());
-        entities::objects::new_wall(world)?;
+        prefabs::create_wall_prefab(world, &mut self.progress_counter.as_mut().unwrap());
         Ok(())
     }
 }
