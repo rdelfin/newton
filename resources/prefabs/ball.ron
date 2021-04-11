@@ -2,7 +2,7 @@
 Prefab(
     entities: [
         PrefabEntity(
-            data: BallPrefab(
+            data: GameObjectPrefab(
                 rigid_body: RigidBody(
                     position: [885.0, 500.0],
                     velocity: [0.0, 0.0],

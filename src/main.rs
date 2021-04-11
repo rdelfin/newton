@@ -28,13 +28,8 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_system_desc(
-            PrefabLoaderSystemDesc::<prefabs::BallPrefab>::default(),
-            "ball_loader",
-            &[],
-        )
-        .with_system_desc(
-            PrefabLoaderSystemDesc::<prefabs::WallPrefab>::default(),
-            "wall_loader",
+            PrefabLoaderSystemDesc::<prefabs::GameObjectPrefab>::default(),
+            "game_object_loader",
             &[],
         )
         .with_bundle(TransformBundle::new())?
@@ -51,11 +46,15 @@ fn main() -> amethyst::Result<()> {
                 .with_plugin(RenderUi::default())
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with(systems::GravitySystem, "gravity_system", &["ball_loader"])
+        .with(
+            systems::GravitySystem,
+            "gravity_system",
+            &["game_object_loader"],
+        )
         .with(
             systems::MovementSystem,
             "movement_system",
-            &["ball_loader", "gravity_system"],
+            &["game_object_loader", "gravity_system"],
         );
 
     let mut game = Application::new(resources, state::MyState::new(), game_data)?;
