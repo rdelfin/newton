@@ -1,4 +1,4 @@
-use crate::{entities, prefabs, resources};
+use crate::prefabs;
 use amethyst::{
     assets::ProgressCounter,
     core::transform::Transform,
@@ -19,7 +19,6 @@ impl SimpleState for MyState {
         let world = data.world;
         let dimensions = (*world.read_resource::<ScreenDimensions>()).clone();
         init_camera(world, &dimensions);
-        load_sprites(world);
         self.load_world(world).unwrap();
     }
 
@@ -74,11 +73,4 @@ fn init_camera(world: &mut World, dimensions: &ScreenDimensions) {
         .with(Camera::standard_2d(dimensions.width(), dimensions.height()))
         .with(transform)
         .build();
-}
-
-fn load_sprites(world: &mut World) {
-    let mut sprite_cache = resources::SpriteCache::new();
-    sprite_cache.load(resources::SpriteKey::Ball, world);
-    sprite_cache.load(resources::SpriteKey::Wall, world);
-    world.insert(sprite_cache);
 }

@@ -13,9 +13,7 @@ use amethyst::{
 };
 
 mod components;
-mod entities;
 mod prefabs;
-mod resources;
 mod state;
 mod systems;
 
